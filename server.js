@@ -6,15 +6,21 @@ const { Pool } = require('pg');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Create a new pool instance
+// Parse the VCAP_SERVICES environment variable
+const vcapServices = JSON.parse(process.env.VCAP_SERVICES || '{}');
+
+// Extract PostgreSQL credentials from user-provided service
+const pgCredentials = vcapServices['user-provided']?.find(service => service.name === 'mypg')?.credentials;
+
+// Create a new pool instance using credentials from Cloud Foundry
 const pool = new Pool({
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
+  user: pgCredentials?.username || process.env.PGUSER,
+  host: pgCredentials?.host || process.env.PGHOST,
+  database: pgCredentials?.database || process.env.PGDATABASE,
+  password: pgCredentials?.password || process.env.PGPASSWORD,
+  port: pgCredentials?.port || process.env.PGPORT,
 });
 
 // Serve static files (HTML, CSS, JS)

@@ -1,0 +1,12 @@
+---
+applications:
+  - name: floki-nodejs
+    memory: 512M
+    instances: 1
+    buildpacks:
+      - nodejs_buildpack
+    path: .
+    services:
+      - mypg
+    env:
+      NODE_ENV: production 
