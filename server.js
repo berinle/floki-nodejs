@@ -10,15 +10,17 @@ const port = process.env.PORT || 3000;
 
 // Parse the VCAP_SERVICES environment variable
 const vcapServices = JSON.parse(process.env.VCAP_SERVICES || '{}');
+// console.log("vcapServices >>>", vcapServices);
 
-// Extract PostgreSQL credentials from user-provided service
-const pgCredentials = vcapServices['user-provided']?.find(service => service.name === 'mypg')?.credentials;
+// Extract PostgreSQL credentials from postgres service named 'test-db'
+const pgCredentials = vcapServices['postgres']?.find(service => service.name === 'test-db')?.credentials;
+// console.log("pgCredentials >>>", pgCredentials);
 
 // Create a new pool instance using credentials from Cloud Foundry
 const pool = new Pool({
-  user: pgCredentials?.username || process.env.PGUSER,
-  host: pgCredentials?.host || process.env.PGHOST,
-  database: pgCredentials?.database || process.env.PGDATABASE,
+  user: pgCredentials?.user || process.env.PGUSER,
+  host: pgCredentials?.hosts[0] || process.env.PGHOST,
+  database: pgCredentials?.db || process.env.PGDATABASE,
   password: pgCredentials?.password || process.env.PGPASSWORD,
   port: pgCredentials?.port || process.env.PGPORT,
 });

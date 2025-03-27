@@ -1,0 +1,32 @@
+{
+    "postgres": [
+      {
+        "binding_guid": "28fad28e-6c2c-4259-8701-804497c2ab04",
+        "binding_name": null,
+        "credentials": {
+          "db": "postgres",
+          "hosts": [
+            "q-s0.postgres-instance.services.service-instance-7a7995ce-a455-4b7c-85a7-f59ea005cbf1.bosh"
+          ],
+          "jdbcUrl": "jdbc:postgresql://q-s0.postgres-instance.services.service-instance-7a7995ce-a455-4b7c-85a7-f59ea005cbf1.bosh:5432/postgres?user=pgadmin&password=U542k69CXzg781FsTV03",
+          "password": "U542k69CXzg781FsTV03",
+          "port": 5432,
+          "uri": "postgresql://pgadmin:U542k69CXzg781FsTV03@q-s0.postgres-instance.services.service-instance-7a7995ce-a455-4b7c-85a7-f59ea005cbf1.bosh:5432/postgres",
+          "user": "pgadmin"
+        },
+        "instance_guid": "7a7995ce-a455-4b7c-85a7-f59ea005cbf1",
+        "instance_name": "test-db",
+        "label": "postgres",
+        "name": "test-db",
+        "plan": "on-demand-postgres-db",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+          "postgres",
+          "pivotal",
+          "on-demand"
+        ],
+        "volume_mounts": []
+      }
+    ]
+  }
